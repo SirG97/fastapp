@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ImageBackground, Image, StyleSheet, View, Text,  SafeAreaView } from 'react-native';
+import {ImageBackground, StyleSheet, View, Text,  SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/native-stack";
 import { Bell } from "phosphor-react-native";
@@ -9,10 +9,20 @@ import DropShadow from "react-native-drop-shadow";
 import colors from '../../assets/colors/colors';
 import pattern from '../../assets/patterns/pattern';
 
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, Card, List} from 'react-native-paper';
 
 
 const Dashboard = () => {
+    const [password, onChangePassword] = React.useState('');
+   let props = {
+    color: 'red',
+        style: {
+            marginLeft: 10,
+            marginRight: 0,
+            marginVertical: 1,
+        }
+    };
+
     return(
         <React.Fragment>
             <View style={styles.container}>
@@ -49,13 +59,58 @@ const Dashboard = () => {
                         </View>
                     </Shadow>
                 </View>
-               
+                <Card style={styles.lastContribution}>
+                    <Text style={styles.lastContributionbalTitle}>Last Contribution</Text>
+                    <Text style={styles.lastContributionbalFigure}>$0.00</Text>   
+                </Card>
+               <View >
+                    <Text style={styles.titleText}>Recent Transactions</Text>
+                    <Text>Last five activities in your account</Text>
+               </View>
+               <View style={styles.listContainer}>
+                    <List.Item
+                            
+                        title="Transafer Recieved"
+                        description="10 Sept 21"
+                        left={props => <List.Icon color={colors.white} style={styles.debit} icon="arrow-up" />}
+                        right={props =><View style={styles.flex}><Text>$500</Text></View>}
+                    />
+                    <List.Item
+                        
+                        title="Transafer Recieved"
+                        description="10 Sept 21"
+                        left={props => <List.Icon color={colors.white} style={styles.debit} icon="arrow-up" />}
+                        right={props =><View style={styles.flex}><Text>$500</Text></View>}
+                    />
+                    <List.Item
+                        
+                        title="Transafer Recieved"
+                        description="10 Sept 21"
+                        left={props => <List.Icon color={colors.white} style={styles.credit} icon="arrow-down" />}
+                        right={props =><View style={styles.flex}><Text>$500</Text></View>}
+                    />
+                    <List.Item
+                        
+                    title="Transafer Recieved"
+                    description="10 Sept 21"
+                    left={props => <List.Icon color={colors.white} style={styles.debit} icon="arrow-up" />}
+                    right={props =><View style={styles.flex}><Text>$500</Text></View>}
+                    />
+               </View>
+              
             </View>
         </React.Fragment>
     );
 }
 
+
+
 const styles = StyleSheet.create({
+    flex:{
+        flex: 1, 
+        alignItems: 'flex-end', 
+        justifyContent: 'center', 
+    },
     container:{
         flex: 1, 
         // alignItems: 'center', 
@@ -73,8 +128,6 @@ const styles = StyleSheet.create({
         // borderWidth: 2,
         // borderColor: 'red'
     },
-
-
     pageTitleContainer:{
 
     },
@@ -98,7 +151,7 @@ const styles = StyleSheet.create({
 
     overviewContainer:{
         marginTop: 31,
-        height: 200,
+        marginBottom: 31,
         width: '100%'
     },
 
@@ -129,38 +182,80 @@ const styles = StyleSheet.create({
         marginBottom: 13,
         width: '100%',
         borderColor: 'red',
-      },
-      card: {
-        backgroundColor: colors.blue,
+    },
+    card: {
+    backgroundColor: colors.blue,
+    borderRadius: 8,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    width: '100%',
+    marginVertical: 10,
+    },
+    elevation: {
+    elevation: 20,
+    shadowColor: '#000000',
+    },
+
+    shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+    },
+
+    balTitle:{
+        fontFamily: 'Inter-Regular',
+        color: 'white',
+        fontSize: 16,
+        lineHeight: 32
+    },
+    balFigure:{
+        fontFamily: 'Inter-Bold',
+        color: 'white',
+        fontSize: 32
+    },
+
+    lastContribution:{
+        paddingLeft: 16,
+        paddingTop: 16,
+        paddingBottom:16,
         borderRadius: 8,
-        paddingVertical: 0,
-        paddingHorizontal: 0,
-        width: '100%',
-        marginVertical: 10,
-      },
-      elevation: {
-        elevation: 20,
-        shadowColor: '#000000',
-      },
+        elevation: 4,
+        marginBottom: 30
+    },
 
-      shadowProp: {
-        shadowColor: '#171717',
-        shadowOffset: {width: 0, height: 3},
-        shadowOpacity: 0.4,
-        shadowRadius: 2,
-      },
+    lastContributionbalTitle:{
+    fontFamily: 'Inter-Regular',
+    color: 'black',
+    fontSize: 16,
+    lineHeight: 32
+    },
+    lastContributionbalFigure:{
+        fontFamily: 'Inter-Bold',
+        color: 'black',
+        fontSize: 32
+    },
+    titleText:{
+        fontSize: 18,
+        fontFamily: 'Inter-SemiBold',
+        color: colors.grey800
+    },
 
-      balTitle:{
-          fontFamily: 'Inter-Regular',
-          color: 'white',
-          fontSize: 16,
-          lineHeight: 32
-      },
-      balFigure:{
-          fontFamily: 'Inter-Bold',
-          color: 'white',
-          fontSize: 32
-      },
+    listContainer:{
+       
+        marginLeft: -16,
+        marginRight: -8,
+    },
+
+    debit:{
+        backgroundColor: colors.yellow,
+        borderRadius: 10
+    },
+
+    credit:{
+        backgroundColor: colors.red,
+        borderRadius: 10
+    },
 
 });
 
